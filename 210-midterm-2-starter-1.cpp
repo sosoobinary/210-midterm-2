@@ -224,7 +224,8 @@ int main() {
     cout << "Store opens:" << endl;
     
     for(int i = 0; i < 5; i++) {
-        string customer = names[rand() % names.size()];
+        int randomNum = rand() % names.size();
+        string customer = names[randomNum];
         storeLine.push_back(countID);
         lineID.push_back(countID);
         nameToID[countID] = customer;
@@ -236,9 +237,8 @@ int main() {
     for(int id : lineID) {
         cout << "\t\t" << nameToID[id] << endl;
     }
-    cout << endl;
 
-    for(int i = 2; i <= 20; i++) {
+    for(int i = 2; i < 21; i++) {
         cout << "Time step #" << i << ":" << endl;
 
         prob = rand() % 100 + 1;
@@ -247,6 +247,32 @@ int main() {
             cout << "\t" << nameToID[servedID] << " is served" << endl;
             storeLine.pop_front();
             lineID.erase(lineID.begin());
+        }
+
+        prob = rand() % 100 + 1;
+        if(prob <= 60) {
+            int randomNum = rand() % names.size();
+            string customer = names[randomNum];
+            storeLine.push_back(countID);
+            lineID.push_back(countID);
+            nameToID[countID] = customer;
+            cout << "\t" << customer << " joins the line" << endl;
+            countID++;
+        }
+
+        prob = rand() % 100 + 1;
+        if(prob <= 20) {
+            int rearID = lineID.back();
+            cout << "\t" << nameToID[rearID] << " (at the rear) left the line" << endl;
+            storeLine.pop_back();
+            lineID.pop_back();
+        }
+
+
+
+        cout << "\tResulting line:" << endl;
+        for(int id : lineID) {
+            cout << "\t\t" << nameToID[id] << endl;
         }
     }
     
