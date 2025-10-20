@@ -208,6 +208,7 @@ public:
 int main() {
     vector<string> names;
     string custName;
+    int prob;
 
     ifstream file("names.txt");
     while(file >> custName) {
@@ -237,8 +238,16 @@ int main() {
     }
     cout << endl;
 
-    if(int i = 2; i <= 20; i++) {
+    for(int i = 2; i <= 20; i++) {
         cout << "Time step #" << i << ":" << endl;
+
+        prob = rand() % 100 + 1;
+        if(prob <= 40) {
+            int servedID = lineID.front();
+            cout << "\t" << nameToID[servedID] << " is served" << endl;
+            storeLine.pop_front();
+            lineID.erase(lineID.begin());
+        }
     }
     
     return 0;
