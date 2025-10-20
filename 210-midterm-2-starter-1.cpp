@@ -230,6 +230,16 @@ int main() {
         cout << "\t" << customer << " joins the line" << endl;
         countID++;
     }
+
+    cout << "\tResulting line:" << endl;
+    for(int id : lineID) {
+        cout << "\t\t" << nameToID[id] << endl;
+    }
+    cout << endl;
+
+    if(int i = 2; i <= 20; i++) {
+        cout << "Time step #" << i << ":" << endl;
+    }
     
     return 0;
 }
