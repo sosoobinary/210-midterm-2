@@ -206,6 +206,8 @@ public:
 };
 
 int main() {
+    srand(static_cast<unsigned>(time(0))); // rand() was giving the same numbers every time, so I found this code on stackoverflow to produce different results each run
+    
     vector<string> names;
     string custName;
     int prob;
@@ -224,6 +226,7 @@ int main() {
     cout << "Store opens:" << endl;
     
     for(int i = 0; i < 5; i++) {
+        
         int randomNum = rand() % names.size();
         string customer = names[randomNum];
         storeLine.push_back(countID);
@@ -281,10 +284,10 @@ int main() {
         if(prob <= 10) {
             int randomNum = rand() % names.size();
             string customer = names[randomNum];
-            storeLine.push_back(countID);
-            lineID.push_back(countID);
+            storeLine.push_front(countID);
+            lineID.insert(lineID.begin(), countID);
             nameToID[countID] = customer;
-            cout << "\t" << customer << " joins the line" << endl;
+            cout << "\t" << customer << " (VIP) joins the front of the line" << endl;
             countID++;
         }
 
