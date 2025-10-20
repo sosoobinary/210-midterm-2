@@ -228,9 +228,9 @@ int main() {
     
     for(int i = 0; i < 5; i++) {
         int randomNum = rand() % names.size();
-        while(find(lineID.begin(), lineID.end(), randomNum) == lineID.end()) {
+        while(find(lineID.begin(), lineID.end(), randomNum) != lineID.end()) {
             randomNum = rand() % names.size();
-            cout << "ran" << endl;
+            cout << names[randomNum] << "ran" << endl;
         }
         string customer = names[randomNum];
         storeLine.push_back(countID);
@@ -248,14 +248,16 @@ int main() {
     for(int i = 2; i < 21; i++) {
         cout << "Time step #" << i << ":" << endl;
 
+        // A customer being helped at the beginning of the line and ordering their coffee
         prob = rand() % 100 + 1;
-        if(prob <= 40) {
+        if(prob <= 40 && !lineID.empty()) {
             int servedID = lineID.front();
             cout << "\t" << nameToID[servedID] << " is served" << endl;
             storeLine.pop_front();
             lineID.erase(lineID.begin());
         }
 
+        // A new customer joining the end of the line
         prob = rand() % 100 + 1;
         if(prob <= 60) {
             int randomNum = rand() % names.size();
@@ -267,16 +269,18 @@ int main() {
             countID++;
         }
 
+        // The customer at the end of the line deciding they don't want to wait and leaving
         prob = rand() % 100 + 1;
-        if(prob <= 20) {
+        if(prob <= 20 && !lineID.empty()) {
             int rearID = lineID.back();
             cout << "\t" << nameToID[rearID] << " (at the rear) left the line" << endl;
             storeLine.pop_back();
             lineID.pop_back();
         }
 
+        // Any particular customer can decide they don't want to wait and leave the line
         prob = rand() % 100 + 1;
-        if(prob <= 10) {
+        if(prob <= 10 && !lineID.empty()) {
             int randomNum = rand() % lineID.size();
             int leaveID = lineID[randomNum];
             cout << "\t" << nameToID[leaveID] << " left the line" << endl;
@@ -284,8 +288,9 @@ int main() {
             lineID.erase(lineID.begin() + randomNum);
         }
 
+        // A VIP (very important person) customer with a Coffee House Gold Card gets to skip the line and go straight to the counter and order
         prob = rand() % 100 + 1;
-        if(prob <= 10) {
+        if(prob <= 10 && !lineID.empty()) {
             int randomNum = rand() % names.size();
             string customer = names[randomNum];
             storeLine.push_front(countID);
@@ -295,10 +300,16 @@ int main() {
             countID++;
         }
 
+        // Print customers in line
         cout << "\tResulting line:" << endl;
-        for(int id : lineID) {
-            cout << "\t\t" << nameToID[id] << endl;
+        if (lineID.empty()) {
+            cout << "\t(empty)\n";
+        } else {
+            for(int id : lineID) {
+                cout << "\t\t" << nameToID[id] << endl;
+            }
         }
+        
     }
     
     return 0;
