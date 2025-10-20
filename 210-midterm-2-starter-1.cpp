@@ -1,3 +1,5 @@
+// COMSC 210 | Midterm 2 | Quang Ngo
+// IDE used: Visual Studio Code
 #include <iostream>
 #include <vector>
 #include <fstream>
