@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <bits/stdc++.h>
 using namespace std;
 
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
@@ -226,8 +227,11 @@ int main() {
     cout << "Store opens:" << endl;
     
     for(int i = 0; i < 5; i++) {
-        
         int randomNum = rand() % names.size();
+        while(find(lineID.begin(), lineID.end(), randomNum) == lineID.end()) {
+            randomNum = rand() % names.size();
+            cout << "ran" << endl;
+        }
         string customer = names[randomNum];
         storeLine.push_back(countID);
         lineID.push_back(countID);
