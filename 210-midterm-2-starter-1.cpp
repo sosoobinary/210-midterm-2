@@ -268,7 +268,25 @@ int main() {
             lineID.pop_back();
         }
 
+        prob = rand() % 100 + 1;
+        if(prob <= 10) {
+            int randomNum = rand() % lineID.size();
+            int leaveID = lineID[randomNum];
+            cout << "\t" << nameToID[leaveID] << " left the line" << endl;
+            storeLine.delete_val(leaveID);
+            lineID.erase(lineID.begin() + randomNum);
+        }
 
+        prob = rand() % 100 + 1;
+        if(prob <= 10) {
+            int randomNum = rand() % names.size();
+            string customer = names[randomNum];
+            storeLine.push_back(countID);
+            lineID.push_back(countID);
+            nameToID[countID] = customer;
+            cout << "\t" << customer << " joins the line" << endl;
+            countID++;
+        }
 
         cout << "\tResulting line:" << endl;
         for(int id : lineID) {
