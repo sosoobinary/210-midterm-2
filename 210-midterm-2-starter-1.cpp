@@ -206,8 +206,6 @@ public:
 };
 
 int main() {
-    DoublyLinkedList storeLine;
-
     vector<string> names;
     string custName;
 
@@ -217,11 +215,20 @@ int main() {
     }
     file.close();
 
+    DoublyLinkedList storeLine;
+    vector<int> lineID;
+    int countID = 1;
+    vector<string> nameToID(names.size());
+
     cout << "Store opens:" << endl;
     
     for(int i = 0; i < 5; i++) {
         string customer = names[rand() % names.size()];
-        storeLine.push_back(customer);
+        storeLine.push_back(countID);
+        lineID.push_back(countID);
+        nameToID[countID] = customer;
+        cout << "\t" << customer << " joins the line" << endl;
+        countID++;
     }
     
     return 0;
